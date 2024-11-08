@@ -26,6 +26,17 @@ class login_model
         return false;
     }
 
+    public function get_username($email)
+    {
+        $stmt = $this->conn->db->prepare("SELECT fname,lname FROM users WHERE email=:email");
+        $stmt->execute([
+                'email' => $email,
+
+        ]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 
 //if ($result && password_verify($password, $result['password'])) {
 //header("Location: ../views/sucess.php");

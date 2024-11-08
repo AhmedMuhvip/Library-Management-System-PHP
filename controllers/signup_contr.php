@@ -9,10 +9,11 @@ require_once '../Model/signup_model.php';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fname    = Validator::string($_POST['fname']);
-    $lname    = Validator::string($_POST['lname']);
-    $email    = Validator::string($_POST['email']);
-    $password = Validator::string($_POST['password']);
+    $fname    = Validator::clean_string($_POST['fname']);
+    $lname    = Validator::clean_string($_POST['lname']);
+    $email    = Validator::clean_string($_POST['email']);
+    $password = Validator::clean_string($_POST['password']);
+
 
     // Validate inputs
     if (Validator::input_empty($fname, $lname, $email, $password)) {
@@ -24,6 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if (Validator::email_registered($email)) {
         $errors['email_is_registered'] = "That username is taken. Try another.";
+    }
+    if (Validator::password_invalid($password)) {
+        $errors['invalid_password'] = "Please Enter Valid Password Should Be More Than 8 Chars And Les than 15";
     }
     if (empty($errors)) {
         $dd     = new signup_model();

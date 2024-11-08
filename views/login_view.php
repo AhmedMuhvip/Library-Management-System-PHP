@@ -1,14 +1,6 @@
 <?php
 
-session_start();
-
-// Retrieve errors and form data from session, if they exist
-$errors   = $_SESSION['errors'] ?? [];
-$formData = $_SESSION['form_data'] ?? [];
-
-// Clear session data after displaying
-unset($_SESSION['errors'], $_SESSION['form_data']);
-?>
+require_once '../Session.php' ?>
 
 <!doctype html>
 <html lang="en" class="h-full bg-white">
@@ -26,13 +18,14 @@ unset($_SESSION['errors'], $_SESSION['form_data']);
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Sign in to your account
+                    Log in to your account
                 </h1>
                 <form class="space-y-4 md:space-y-6" action="../controllers/login_contr.php" method="GET">
                     <?php
                     if (isset($errors['empty_inputs'])): ?>
                         <p class="text-red-500"><?php
                             echo $errors['empty_inputs']; ?></p>
+
                     <?php
                     endif; ?>
                     <div>

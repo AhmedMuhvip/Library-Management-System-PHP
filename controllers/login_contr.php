@@ -4,7 +4,7 @@ require_once '../Database.php';
 require_once '../Validator.php';
 require_once '../Model/login_model.php';
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $email    = Validator::string($_GET['email']);
+    $email    = Validator::clean_string($_GET['email']);
     $password = $_GET['password'];
     $errors   = [];
     if (Validator::input_empty_login($email, $password)) {
@@ -17,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = "";
     $ll     = new login_model();
     if (empty($errors) && $ll->check_data($email, $password)) {
+        session_start();
+        $username             = $ll->get_username($email);
+        $_SESSION['username'] = $username['fname'];
         header("Location: ../views/sucess.php"); // No space around the colon
         exit();
     } else {

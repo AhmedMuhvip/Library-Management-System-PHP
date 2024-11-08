@@ -28,7 +28,6 @@ class Validator
         }
     }
 
-
     public static function is_email_invalid(string $email)
     {
         if ( ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -38,8 +37,7 @@ class Validator
         }
     }
 
-
-    public static function string($value)
+    public static function clean_string($value)
     {
         $value = trim($value);
         $value = stripslashes($value);
@@ -59,6 +57,11 @@ class Validator
         }
 
         return true;
+    }
+
+    public static function password_invalid($paswword, $min = 8, $max = 15)
+    {
+        return strlen($paswword) > $max || strlen($paswword) < $min;
     }
 
 }

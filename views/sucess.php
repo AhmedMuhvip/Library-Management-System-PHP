@@ -1,3 +1,6 @@
+<?php
+
+require_once '../Session.php' ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,7 +15,8 @@
         <div class="container mx-auto">
             <nav class="block w-full max-w-screen-2xl rounded-xl py-4 px-8 shadow-md backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border-white/80 bg-white text-white relative z-50 mt-6 border-0">
                 <div class="container flex items-center justify-between mx-auto">
-                    <p class="block antialiased font-sans text-blue-gray-900 text-lg font-bold"> Library Management
+                    <p class="block antialiased font-sans text-blue-gray-900 text-lg font-bold">Hello <?= $username ?>
+                        To Our Library Management
                         System</p>
                     <ul class="items-center hidden gap-8 ml-10 lg:flex">
                         <li><a href="#"

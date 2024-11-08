@@ -35,6 +35,7 @@ VALUES (:fname, :lname, :username, :password, :email)
         return $result;
     }
 
+
     public function generateUsername($fname, $lname)
     {
         do {
@@ -50,7 +51,7 @@ VALUES (:fname, :lname, :username, :password, :email)
 
     public function get_email($value)
     {
-//    $value=strtolower($value);
+//        $value=strtolower($value);
         $stmt = $this->conn->db->prepare("SELECT email FROM users WHERE email =:email;");
         $stmt->execute([
                 'email' => $value,
