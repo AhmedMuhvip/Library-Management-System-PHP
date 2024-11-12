@@ -1,6 +1,9 @@
 <?php
 
-require_once '../Session.php' ?>
+
+require __DIR__.'/../session.php';
+
+?>
 
 <!doctype html>
 <html lang="en" class="h-full bg-white">
@@ -35,7 +38,7 @@ require_once '../Session.php' ?>
                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="name@company.com" ="">
                         <?php
-                        if (isset($errors['email_not_registered'])): ?>
+                        if (isset($errors['email_not_registered']) && ! isset($errors['empty_inputs'])): ?>
                             <p class="text-red-500"><?php
                                 echo $errors['email_not_registered']; ?></p>
                         <?php
@@ -52,13 +55,13 @@ require_once '../Session.php' ?>
                         Sign in
                     </button>
                     <?php
-                    if (isset($errors['Email Or Password Is Worng'])): ?>
+                    if (isset($errors['Email Or Password Is Wrong']) && ! isset($errors['empty_inputs']) && ! isset($errors['email_not_registered'])): ?>
                         <p class="text-red-500"><?php
-                            echo $errors['Email Or Password Is Worng']; ?></p>
+                            echo $errors['Email Or Password Is Wrong']; ?></p>
                     <?php
                     endif; ?>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Don’t have an account yet? <a href="../views/signup_view.php" target="_blank"
+                        Don’t have an account yet? <a href="/signup" target="_blank"
                                                       class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign
                             up</a>
                     </p>

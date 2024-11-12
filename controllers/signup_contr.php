@@ -17,14 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate inputs
     if (Validator::input_empty($fname, $lname, $email, $password)) {
-        $errors["empty_inputs"] = "Please fill in all fields.";
+        $errors["empty_inputs"] = "Please fill all fields.";
     }
 
     if (Validator::is_email_invalid($email)) {
         $errors["invalid_email"] = "Please enter a valid email address.";
     }
     if (Validator::email_registered($email)) {
-        $errors['email_is_registered'] = "That username is taken. Try another.";
+        $errors['email_is_registered'] = "That email is taken. Try another.";
     }
     if (Validator::password_invalid($password)) {
         $errors['invalid_password'] = "Please Enter Valid Password Should Be More Than 8 Chars And Les than 15";
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result) {
             session_start();
             $_SESSION['signup_success'] = "Signup successful! Redirecting to login page...";
-            header("Location: ../views/login_view.php");
+            header("Location: /");
             exit();
         }
 
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_start();
         $_SESSION['errors']    = $errors;
         $_SESSION['form_data'] = $_POST; // Save form data to repopulate fields
-        header("Location: ../views/signup_view.php");
+        header("Location: /signup");
         exit();
     }
 }

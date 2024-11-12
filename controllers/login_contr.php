@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $password = $_GET['password'];
     $errors   = [];
     if (Validator::input_empty_login($email, $password)) {
-        $errors["empty_inputs"] = "Please fill in all fields.";
+        $errors["empty_inputs"] = "Please fill all fields.";
     }
 
     if ( ! Validator::email_registered($email)) {
@@ -23,21 +23,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         header("Location: ../views/sucess.php"); // No space around the colon
         exit();
     } else {
-        $errors['Email Or Password Is Worng'] = "Email Or Password Is Worng";
+        $errors['Email Or Password Is Wrong'] = "Email Or Password Is Wrong";
     }
 
     if ( ! $result || ! password_verify($password, $result['password'])) {
         session_start();
         $_SESSION['errors']    = $errors;
         $_SESSION['form_data'] = $_POST; // Save form data to repopulate fields
-        header("Location: ../views/login_view.php");
+        header("Location: /");
         exit();
     }
     if ( ! empty($errors)) {
         session_start();
         $_SESSION['errors']    = $errors;
         $_SESSION['form_data'] = $_POST; // Save form data to repopulate fields
-        header("Location: ../views/login_view.php");
+        header("Location: /");
         exit();
     }
 }

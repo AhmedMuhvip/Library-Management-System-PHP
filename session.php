@@ -1,6 +1,5 @@
 <?php
 
-
 session_start();
 
 // Retrieve errors and form data from session, if they exist

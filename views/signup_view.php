@@ -1,6 +1,7 @@
 <?php
 
-require_once '../Session.php' ?>
+require __DIR__.'/../session.php';
+?>
 <!doctype html>
 <html lang="en" class="h-full bg-white">
 <head>
@@ -11,8 +12,9 @@ require_once '../Session.php' ?>
     <title>Sign Up</title>
 </head>
 <body>
-<section class="bg-gray-50 dark:bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+<section class=" h-full bg-gray-50 dark:bg-gray-900 ">
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
+        <!--        <img class=" w-50 h-60 mx-auto mb-2" src="../images/bookshelf.png" alt="logo">-->
         <div class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -50,7 +52,7 @@ require_once '../Session.php' ?>
                         echo htmlspecialchars($formData['email'] ?? ''); ?>"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <?php
-                        if (isset($errors['invalid_email'])): ?>
+                        if (isset($errors['invalid_email']) && ! isset($errors['empty_inputs'])): ?>
                             <p class="text-red-500"><?php
                                 echo $errors['invalid_email']; ?></p>
                         <?php
@@ -69,7 +71,7 @@ require_once '../Session.php' ?>
                         <input type="password" name="password" id="password"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <?php
-                        if (isset($errors['invalid_password'])): ?>
+                        if (isset($errors['invalid_password']) && ! isset($errors['empty_inputs']) && ! isset($errors['invalid_email'])): ?>
                             <p class="text-red-500"><?php
                                 echo $errors['invalid_password']; ?></p>
                         <?php
@@ -81,25 +83,13 @@ require_once '../Session.php' ?>
                         Create an account
                     </button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Already have an account? <a href="../views/login_view.php"
+                        Already have an account? <a href="/"
                                                     class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login
                             here</a>
                     </p>
                 </form>
             </div>
         </div>
-    </div>
-    <div class="success-message">
-        <?php
-        session_start();
-        if (isset($_SESSION['signup_success'])):?>
-            <p class="text-red-500"><?php
-                echo $errors['signup_success']; ?></p>
-            <?php
-            echo $_SESSION['signup_success'];
-            unset($_SESSION['signup_success']); // Clear message after displaying
-        endif;
-        ?>
     </div>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
