@@ -1,8 +1,8 @@
 <?php
 
 
-require_once 'Database.php';
-require_once '../Model/signup_model.php';
+require_once __DIR__.'/Database.php';
+require_once __DIR__.'/Model/signup_model.php';
 
 class Validator
 {

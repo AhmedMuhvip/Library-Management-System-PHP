@@ -1,6 +1,7 @@
 <?php
 
-require_once '../Session.php' ?>
+require __DIR__.'/../session.php';
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,10 +16,26 @@ require_once '../Session.php' ?>
         <div class="container mx-auto">
             <nav class="block w-full max-w-screen-2xl rounded-xl py-4 px-8 shadow-md backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border-white/80 bg-white text-white relative z-50 mt-6 border-0">
                 <div class="container flex items-center justify-between mx-auto">
-                    <p class="block antialiased font-sans text-blue-gray-900 text-lg font-bold">Hello <?= $username ?>
+                    <p class="block antialiased font-sans text-blue-gray-900 text-lg font-bold">Hello <?php
+                        if (isset($username)) {
+                            echo $username;
+                        } ?>
                         To Our Library Management
                         System</p>
                     <ul class="items-center hidden gap-8 ml-10 lg:flex">
+                        <?php
+                        if (isset($role) && $role === 'admin'):
+                            ?>
+                            <li><a href="/bookmangement"
+                                   class="antialiased font-sans text-base leading-relaxed flex items-center gap-2 font-medium text-gray-900">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                         aria-hidden="true" data-slot="icon" class="w-5 h-5">
+                                        <path d="M5.566 4.657A4.505 4.505 0 0 1 6.75 4.5h10.5c.41 0 .806.055 1.183.157A3 3 0 0 0 15.75 3h-7.5a3 3 0 0 0-2.684 1.657ZM2.25 12a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3v-6ZM5.25 7.5c-.41 0-.806.055-1.184.157A3 3 0 0 1 6.75 6h10.5a3 3 0 0 1 2.683 1.657A4.505 4.505 0 0 0 18.75 7.5H5.25Z"></path>
+                                    </svg>
+                                    Book Management</a></li>
+                        <?php
+                        endif; ?>
+
                         <li><a href="#"
                                class="antialiased font-sans text-base leading-relaxed flex items-center gap-2 font-medium text-gray-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -35,15 +52,7 @@ require_once '../Session.php' ?>
                                           clip-rule="evenodd"></path>
                                 </svg>
                                 My Profile</a></li>
-                        <li><a href="#"
-                               class="antialiased font-sans text-base leading-relaxed flex items-center gap-2 font-medium text-gray-900">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                     aria-hidden="true" data-slot="icon" class="w-5 h-5">
-                                    <path fill-rule="evenodd"
-                                          d="M2.25 6a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V6Zm3.97.97a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06l-2.25 2.25a.75.75 0 0 1-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 0 1 0-1.06Zm4.28 4.28a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z"
-                                          clip-rule="evenodd"></path>
-                                </svg>
-                                Docs</a></li>
+
                     </ul>
                 </div>
                 <div class="block w-full basis-full overflow-hidden" style="height:0" data-projection-id="3">

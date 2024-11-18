@@ -1,8 +1,8 @@
 <?php
 
-require_once '../Database.php';
-require_once '../Validator.php';
-require_once '../Model/login_model.php';
+require_once __DIR__.'/../Database.php';
+require_once __DIR__.'/../Validator.php';
+require_once __DIR__.'/../Model/login_model.php';
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $email    = Validator::clean_string($_GET['email']);
     $password = $_GET['password'];
@@ -18,9 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $ll     = new login_model();
     if (empty($errors) && $ll->check_data($email, $password)) {
         session_start();
-        $username             = $ll->get_username($email);
-        $_SESSION['username'] = $username['fname'];
-        header("Location: ../views/sucess.php"); // No space around the colon
+
+        $data                 = $ll->get_data($email);
+        $_SESSION['username'] = $data['fname'];
+        $_SESSION['role']     = $data['role'];
+        header("Location: /home"); // No space around the colon
         exit();
     } else {
         $errors['Email Or Password Is Wrong'] = "Email Or Password Is Wrong";

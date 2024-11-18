@@ -6,5 +6,6 @@ session_start();
 $errors   = $_SESSION['errors'] ?? [];
 $formData = $_SESSION['form_data'] ?? [];
 $username = $_SESSION['username'] ?? [];
+$role     = $_SESSION['role'] ?? [];
 // Clear session data after displaying
 unset($_SESSION['errors'], $_SESSION['form_data']);

@@ -26,9 +26,9 @@ class login_model
         return false;
     }
 
-    public function get_username($email)
+    public function get_data($email)
     {
-        $stmt = $this->conn->db->prepare("SELECT fname,lname FROM users WHERE email=:email");
+        $stmt = $this->conn->db->prepare("SELECT fname,lname,role FROM users WHERE email=:email");
         $stmt->execute([
                 'email' => $email,
 
