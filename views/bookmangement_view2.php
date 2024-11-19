@@ -56,11 +56,11 @@ require_once __DIR__.'/../Model/viewbooks.php';
                             endif; ?>
                         </td>
 
-                        <td class="px-4 py-2 text-gray-300 text-center"><?php
-                            echo $row['book_name']; ?></td>
+
                         <td class="px-4 py-2 text-gray-300 text-center"><?php
                             echo $row['author']; ?></td>
-
+                        <td class="px-4 py-2 text-gray-300 text-center"><?php
+                            echo $row['book_name']; ?></td>
                         <td class="px-4 py-2 text-gray-300 text-center"><?= $row['category'] ?> </td>
                         <td class="px-4 py-2 text-center">
                             <?= $row['published_at'] ?>
@@ -102,32 +102,48 @@ require_once __DIR__.'/../Model/viewbooks.php';
         </div>
         <div class="flex items-center gap-4 mt-4 md:mt-0">
             <?php
-            if (isset($pagesNum, $page)): ?>
-            <span>Showing <?php
-                echo $page ?> of <?= $pagesNum ?>
+            if (isset($pages)): ?>
+            <span>Showing 1 to <?= $pages ?> of
                 <?php
+                echo $pages;
                 endif;
-                ?></span>
-            <div class="flex items-center gap-4 mt-4 md:mt-0">
-                <div class="flex space-x-2">
+                ?> entries</span>
+            <div class="flex space-x-2">
+                <?php
+                if (isset($_GET['page-nr']) && $_GET['page-nr'] > 1) {
+                    ?>
+                    <a class="px-2 py-1 border rounded bg-gray-700 text-gray-300 hover:bg-gray-600" href="?page-nr=<?php
+                    echo $_GET['page-nr'] - 1 ?>">Prev</a>
                     <?php
-                    if ($page > 1): ?>
-                        <a href="/bookmangement?page=<?= $page - 1 ?>"
-                           class="px-2 py-1 border rounded bg-gray-700 text-gray-300 hover:bg-gray-600">Prev</a>
+                } else {
+                    ?>
+                    <a class="px-2 py-1 border rounded bg-gray-700 text-gray-300 hover:bg-gray-600">Prev</a>
                     <?php
-                    endif; ?>
+                }
+                ?>
+                <?php
+                if ( ! isset($_GET['page-nr'])) {
+                    ?>
+                    <a class="px-2 py-1 border rounded bg-gray-700 text-gray-300 hover:bg-gray-600" href="?page-nr=2">Next</a>
                     <?php
+                } else {
+                    if ($_GET['page-nr'] >= $pages) {
+                        ?>
 
-                    if ($page >= 1 && $page != $pagesNum): ?>
+                        <?php
+                    } else {
+                        ?>
                         <a class="px-2 py-1 border rounded bg-gray-700 text-gray-300 hover:bg-gray-600"
-                           href="/bookmangement?page=<?= $page + 1 ?>">Next</a>
-                    <?php
-                    endif; ?>
+                           href="?page-nr=<?php
+                           echo $_GET['page-nr'] + 1 ?>">Next</a>
 
+                        <?php
 
-                </div>
+                    }
+                } ?>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

@@ -3,36 +3,28 @@
 require_once __DIR__.'/../Database.php';
 require_once __DIR__.'/../Validator.php';
 
-//$books_per_page = 5;
-//$current_page   = 1;
-//$current_books_list;
-//
-//if (isset($_GET['count'])) {
-//    $ol = $_GET['peerage'];
-//    echo $ol;
-//    die();
-//} elseif (isset($_GET['next'])) {
-//    $ol = $_GET['peerage'];
-//    echo $ol;
-//    die();
-//} elseif (isset($_GET['previous'])) {
-//    $ol = $_GET['peerage'];
-//    echo $ol;
-//    die();
-//}
-
-
-$ls             = new Database();
-$start          = 0;
-$rows_per_pages = 7;
-
-if (isset($_GET['page-nr'])) {
-    $page  = $_GET['page-nr'] - 1;
-    $start = $page * $rows_per_pages;
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
 }
-$records = $ls->db->query('SELECT count(*) FROM books');
-$count   = $records->fetchColumn();
-$pages   = ceil($count / $rows_per_pages);
-$stmt    = $ls->db->prepare("SELECT * FROM books LIMIT {$start},{$rows_per_pages}");
+
+$ls        = new Database();
+$records   = $ls->db->query('SELECT count(*) FROM books');
+$count     = $records->fetchColumn();
+$pageLimit = 5;
+$pagesNum  = ceil($count / $pageLimit);
+$offset    = ($page - 1) * $pageLimit;
+
+function validatePage(int $page, int $pagesNum): bool
+{
+    return $page >= 1 and $page <= $pagesNum;
+}
+
+if ( ! validatePage($page, $pagesNum)) {
+    exit();
+}
+
+$stmt = $ls->db->prepare("SELECT * FROM books LIMIT {$pageLimit} OFFSET {$offset}");
 $stmt->execute();
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
