@@ -36,7 +36,7 @@ require __DIR__.'/../session.php';
                         <?php
                         endif; ?>
 
-                        <li><a href="#"
+                        <li><a href="/books"
                                class="antialiased font-sans text-base leading-relaxed flex items-center gap-2 font-medium text-gray-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                      aria-hidden="true" data-slot="icon" class="w-5 h-5">
@@ -55,6 +55,13 @@ require __DIR__.'/../session.php';
 
                     </ul>
                 </div>
+
+                <img class="w-10 h-10 rounded-full" src="/p_images/<?php
+                if (isset($img)) {
+                    echo $img;
+                } ?>"
+                     alt="Rounded avatar">
+
                 <div class="block w-full basis-full overflow-hidden" style="height:0" data-projection-id="3">
                     <div class="container px-2 pt-4 mx-auto mt-3 border-t border-gray-200">
                         <ul class="flex flex-col gap-4">
@@ -131,6 +138,8 @@ require __DIR__.'/../session.php';
             </div>
         </div>
     </div>
+
 </section>
 </body>
 </html>
+

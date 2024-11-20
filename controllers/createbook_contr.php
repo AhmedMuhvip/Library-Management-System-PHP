@@ -6,17 +6,18 @@ require_once __DIR__.'/../Model/createbook_model.php';
 
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $book_name    = Validator::clean_string($_GET['book_name']);
-    $author       = Validator::clean_string($_GET['author']);
-    $published_at = $_GET['published_at'];
-    $category     = $_GET['category'];
+    $book_name     = Validator::clean_string($_GET['book_name']);
+    $author        = Validator::clean_string($_GET['author']);
+    $published_at  = $_GET['published_at'];
+    $category      = $_GET['category'];
+    $book_quantity = $_GET['book_quantity'];
 
-    if (Validator::input_empty($book_name, $author, $published_at, $category)) {
+    if (Validator::input_empty($book_name, $author, $published_at, $category, $book_quantity)) {
         $errors["empty_inputs"] = "Please fill all fields.";
     }
     if (empty($errors)) {
         $book   = new createbook_model();
-        $result = $book->createBook($book_name, $author, $published_at, $category);
+        $result = $book->createBook($book_name, $author, $published_at, $category, $book_quantity);
 
         if ($result) {
             header("Location: /bookmangement");

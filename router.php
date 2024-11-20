@@ -6,11 +6,14 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 $routes = [
         '/'              => 'views/login_view.php',
         '/signup'        => 'views/signup_view.php',
-        '/home'          => 'views/home.php',
+        '/home'          => 'views/home_view.php',
         '/bookmangement' => 'views/bookmangement_view.php',
         '/createbook'    => 'views/createbook_view.php',
-        '/addbook'       => 'controllers/addbook_contr.php',
+        '/addbook'       => 'controllers/createbook_contr.php',
         '/delete'        => 'controllers/deletbook_contr.php',
+        '/books'         => 'views/books_view.php',
+        '/tr'            => 'controllers/signup_contr.php',
+
 ];
 
 

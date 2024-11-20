@@ -9,13 +9,15 @@ class Validator
 
 
     // Validate a string input, returning sanitized string or false if invalid
-    public static function input_empty($fname, $lanme, $email, $password)
+    public static function input_empty(...$inputs)
     {
-        if (empty($fname) || empty($lanme) || empty($email) || empty($password)) {
-            return true;
-        } else {
-            return false;
+        foreach ($inputs as $input) {
+            if (empty($input)) {
+                return true; // If any input is empty, return true
+            }
         }
+
+        return false; // If none of the inputs are empty, return false
     }
 
 

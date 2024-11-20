@@ -30,9 +30,8 @@ require_once __DIR__.'/../Model/viewbooks.php';
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="m1 9 4-4-4-4"/>
                 </svg>
-                <a href="/bookmangement"
-                   class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Books
-                    Management</a>
+                <a href="/books"
+                   class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Books</a>
             </div>
         </li>
     </ol>
@@ -40,14 +39,8 @@ require_once __DIR__.'/../Model/viewbooks.php';
 
 <div class="max-w-4xl mx-auto bg-gray-800 shadow-lg rounded-lg">
     <!-- Card Header -->
-    <div class="flex justify-between items-center border-b border-gray-700 p-5">
-        <h3 class="text-xl font-semibold text-gray-200">Books</h3>
-        <label class="flex items-center space-x-2 text-gray-400">
-            <a href="/createbook" role="button"
-               class="bg-[#111827] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                Create Book
-            </a>
-        </label>
+    <div class="flex justify-center items-center border-b border-gray-700 p-5 text-center ">
+        <h3 class=" text-xl font-semibold text-gray-200 ">Books</h3>
     </div>
 
     <!-- Card Body with Table -->
@@ -95,11 +88,11 @@ require_once __DIR__.'/../Model/viewbooks.php';
                             <?= $row['published_at'] ?>
                         </td>
                         <td class="px-4 py-2 text-gray-300 text-center"><?= $row['book_quantity'] ?> </td>
-                        <td class="px-4 py-2 text-center">
-                            <form action="/delete" method="GET">
+                        <td class="px-4 py-3 text-center">
+                            <form action="/borrow" method="GET">
 
-                                <a class="text-red-400 hover:text-red-500"
-                                   href="/delete?id=<?= $row['book_id'] ?>">Delete</a>
+                                <a class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 text-center dark:bg-blue-600"
+                                   href="/borrow?id=<?= $row['book_id'] ?>">Borrow</a>
                             </form>
                         </td>
 

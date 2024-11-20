@@ -21,7 +21,8 @@ require __DIR__.'/../session.php';
                     Create an account
                 </h1>
 
-                <form class="space-y-4 md:space-y-6" action="../controllers/signup_contr.php" method="POST">
+                <form class="space-y-4 md:space-y-6" action="../controllers/signup_contr.php" method="POST"
+                      enctype="multipart/form-data">
                     <?php
                     if (isset($errors['empty_inputs'])): ?>
                         <p class="text-red-500"><?php
@@ -77,7 +78,16 @@ require __DIR__.'/../session.php';
                         <?php
                         endif; ?>
                     </div>
+                    <div>
 
+
+                        <label class="block mb-3 text-sm font-medium text-gray-900 dark:text-white" for="image_input">Upload
+                            file</label>
+                        <input class=" block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                               id="image_input" type="file" name="image">
+
+
+                    </div>
                     <button type="submit"
                             class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-3 text-center transition-transform transform hover:scale-105 shadow-lg hover:shadow-xl dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Create an account

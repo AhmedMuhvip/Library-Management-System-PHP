@@ -9,7 +9,7 @@ class signup_model
         $this->conn = new Database();
     }
 
-    public function createUser($fname, $lname, $email, $password)
+    public function createUser($fname, $lname, $email, $password, $image_name)
     {
 // Generate a unique username
         $username = $this->generateUsername($fname, $lname);
@@ -19,17 +19,18 @@ class signup_model
 
 // Prepare the SQL statement
         $stmt = $this->conn->db->prepare('
-INSERT INTO users (fname, lname, username, password, email)
-VALUES (:fname, :lname, :username, :password, :email)
+INSERT INTO users (fname, lname, username, password, email,image_name )
+VALUES (:fname, :lname, :username, :password, :email,:image_name )
 ');
 
 // Execute with bound parameters
         $result = $stmt->execute([
-                'fname'    => $fname,
-                'lname'    => $lname,
-                'username' => $username,
-                'password' => $hashedPassword,
-                'email'    => $email,
+                'fname'      => $fname,
+                'lname'      => $lname,
+                'username'   => $username,
+                'password'   => $hashedPassword,
+                'email'      => $email,
+                'image_name' => $image_name,
         ]);
 
         return $result;

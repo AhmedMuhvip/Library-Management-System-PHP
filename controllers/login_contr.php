@@ -19,9 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (empty($errors) && $ll->check_data($email, $password)) {
         session_start();
 
-        $data                 = $ll->get_data($email);
-        $_SESSION['username'] = $data['fname'];
-        $_SESSION['role']     = $data['role'];
+        $data                       = $ll->get_data($email);
+        $_SESSION['username']       = $data['fname'];
+        $_SESSION['role']           = $data['role'];
+        $_SESSION['image_new_name'] = $data['image_name'];
         header("Location: /home"); // No space around the colon
         exit();
     } else {

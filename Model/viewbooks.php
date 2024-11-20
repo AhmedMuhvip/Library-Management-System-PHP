@@ -25,6 +25,6 @@ if ( ! validatePage($page, $pagesNum)) {
     exit();
 }
 
-$stmt = $ls->db->prepare("SELECT * FROM books LIMIT {$pageLimit} OFFSET {$offset}");
+$stmt = $ls->db->prepare("SELECT  * FROM books LIMIT {$pageLimit} OFFSET {$offset}");
 $stmt->execute();
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
