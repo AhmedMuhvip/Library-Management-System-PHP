@@ -66,6 +66,16 @@ class Validator
         return strlen($paswword) > $max || strlen($paswword) < $min;
     }
 
+
+//    public static function Valdiate_image($image_actual_ext,$allowed_type,$image_size,$image_tmp_name){
+//        if (in_array($image_actual_ext, $allowed_type) && $image_size < 500000) {
+//            $image_new_name = uniqid('', true).".".$image_actual_ext;
+//            $image_dest     = __DIR__.'/../p_images/'.$image_new_name;
+//            move_uploaded_file($image_tmp_name, $image_dest);
+//        }else{
+//            echo "<div>Error</div>"
+//        }
+//    }
 }
 
 

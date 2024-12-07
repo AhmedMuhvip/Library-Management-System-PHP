@@ -1,8 +1,9 @@
 <?php
 
-
 require __DIR__.'/../session.php';
-
+if (isset($_SESSION['logged'])) {
+    header('Location: /home');
+}
 ?>
 
 <!doctype html>
@@ -12,7 +13,8 @@ require __DIR__.'/../session.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet"/>
-    <title>Document</title>
+    <title>Log In</title>
+    <script async src="../script/login_script.js"></script>
 </head>
 <body>
 <section class="bg-gray-50 dark:bg-gray-900">
@@ -50,7 +52,7 @@ require __DIR__.'/../session.php';
                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         ="">
                     </div>
-                    <button type="submit"
+                    <button type="submit" id="btn"
                             class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-3 text-center transition-transform transform hover:scale-105 shadow-lg hover:shadow-xl dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Sign in
                     </button>

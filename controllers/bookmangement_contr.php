@@ -2,16 +2,16 @@
 
 require_once __DIR__.'/../Database.php';
 require_once __DIR__.'/../Validator.php';
+require_once __DIR__.'/../Model/bookmangement_model.php';
 
 // Get the current page from the query string or default to 1
 $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ?: 1;
 
 // Initialize database connection
-$ls = new Database();
+$ls = new bookmangement_model();
 
 // Count total records in the books table
-$records = $ls->db->query('SELECT count(*) FROM books');
-$count   = $records->fetchColumn();
+$count = $ls->count_book();
 
 // Pagination logic
 $pageLimit = 5;
@@ -28,11 +28,7 @@ if ( ! validatePage($page, $pagesNum)) {
     header("Location: /bookmanagement?page=1");
     exit();
 }
-
+$rows = $ls->get_pg_data($pageLimit, $offset);
 // Fetch books for the current page
-$stmt = $ls->db->prepare("SELECT * FROM books LIMIT :pageLimit OFFSET :offset");
-$stmt->bindValue(':pageLimit', $pageLimit, PDO::PARAM_INT);
-$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-$stmt->execute();
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 

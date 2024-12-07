@@ -20,9 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         session_start();
 
         $data                       = $ll->get_data($email);
-        $_SESSION['username']       = $data['fname'];
+        $_SESSION['id']             = $data['user_id'];
+        $_SESSION['fname']          = $data['fname'];
+        $_SESSION['lname']          = $data['lname'];
         $_SESSION['role']           = $data['role'];
         $_SESSION['image_new_name'] = $data['image_name'];
+        $_SESSION['logged']         = true;
+        $_SESSION['ava']            = $data['availability'];
         header("Location: /home"); // No space around the colon
         exit();
     } else {

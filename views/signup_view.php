@@ -1,6 +1,10 @@
 <?php
 
 require __DIR__.'/../session.php';
+if (isset($_SESSION['logged'])) {
+    header('Location: /home');
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="en" class="h-full bg-white">

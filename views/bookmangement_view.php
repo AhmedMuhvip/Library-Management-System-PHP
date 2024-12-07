@@ -1,6 +1,11 @@
 <?php
 
-require_once __DIR__.'/../Model/viewbooks.php';
+require __DIR__.'/../controllers/bookmangement_contr.php';
+require __DIR__.'/../session.php';
+if ( ! isset($_SESSION['logged'])) {
+    header('Location: /');
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="en">

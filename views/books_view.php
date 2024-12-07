@@ -1,6 +1,12 @@
 <?php
 
-require_once __DIR__.'/../Model/viewbooks.php';
+require_once __DIR__.'/../controllers/bookmangement_contr.php';
+include __DIR__.'/../controllers/borrow_contr.php';
+require __DIR__.'/../session.php';
+if ( ! isset($_SESSION['logged'])) {
+    header('Location: /');
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -53,7 +59,6 @@ require_once __DIR__.'/../Model/viewbooks.php';
                 <th class="px-4 py-2 font-semibold text-gray-300">Author</th>
                 <th class="px-4 py-2 font-semibold text-gray-300">Category</th>
                 <th class="px-4 py-2 font-semibold text-gray-300">Published At</th>
-                <th class="px-4 py-2 font-semibold text-gray-300">Book Quantity</th>
                 <th class="px-4 py-2 font-semibold text-gray-300">Actions</th>
 
             </tr>
@@ -85,15 +90,20 @@ require_once __DIR__.'/../Model/viewbooks.php';
 
                         <td class="px-4 py-2 text-gray-300 text-center"><?= $row['category'] ?> </td>
                         <td class="px-4 py-2 text-center">
-                            <?= $row['published_at'] ?>
+                            <?= date('d-m-Y', strtotime($row['published_at'])) ?>
                         </td>
-                        <td class="px-4 py-2 text-gray-300 text-center"><?= $row['book_quantity'] ?> </td>
                         <td class="px-4 py-3 text-center">
-                            <form action="/borrow" method="GET">
-
-                                <a class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 text-center dark:bg-blue-600"
-                                   href="/borrow?id=<?= $row['book_id'] ?>">Borrow</a>
-                            </form>
+                            <?php
+                            if ($row['availability'] === 1): ?>
+                                <form action="/borrow" method="GET">
+                                    <a class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 text-center dark:bg-blue-600"
+                                       href="/borrow?id=<?= $row['book_id'] ?>">Borrow</a>
+                                </form>
+                            <?php
+                            else:
+                                ?>
+                            <?php
+                            endif; ?>
                         </td>
 
                     </tr>
@@ -104,7 +114,6 @@ require_once __DIR__.'/../Model/viewbooks.php';
             </tbody>
         </table>
     </div>
-
     <!-- Card Footer with Pagination -->
     <div class="flex flex-col md:flex-row items-center justify-between p-5 border-t border-gray-700 text-sm text-gray-400">
         <div class="flex items-center gap-2">
@@ -141,5 +150,27 @@ require_once __DIR__.'/../Model/viewbooks.php';
         </div>
 
     </div>
+    <?php
+    if (isset($_SESSION['br_result']) && $_SESSION['br_result'] === 3): ?>
+        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3"
+             role="alert">
+            <p class="font-bold">Informational message</p>
+            <p class="text-sm">You Can't Borrow More Than 3 Books</p>
+        </div>
+
+        <?php
+        unset($_SESSION['br_result']);
+    endif; ?>
+    <?php
+    if (isset($_SESSION['result_borrowed_same_book'], $_SESSION['br_result']) && $_SESSION['result_borrowed_same_book']): ?>
+        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3"
+             role="alert">
+            <p class="font-bold">Informational message</p>
+            <p class="text-sm">You Can't Borrow Same Books</p>
+        </div>
+
+        <?php
+        unset($_SESSION['br_result'], $_SESSION['result_borrowed_same_book']);
+    endif; ?>
 </body>
 </html>
